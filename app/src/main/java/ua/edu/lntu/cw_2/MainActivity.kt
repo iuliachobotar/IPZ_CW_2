@@ -58,6 +58,7 @@ fun SignIn(onSignIn: (String, String) -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -86,8 +87,8 @@ fun SignIn(onSignIn: (String, String) -> Unit) {
 
 @Composable
 fun SignedInContent() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val email by remember { mutableStateOf("") }
+    val password by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
