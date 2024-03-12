@@ -51,13 +51,17 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun SignedInContent() {
+        TODO("Not yet implemented")
+    }
 }
 
 @Composable
 fun SignIn(onSignIn: (String, String) -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
+    var isSignInSuccess by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -78,19 +82,26 @@ fun SignIn(onSignIn: (String, String) -> Unit) {
         )
         Button(
             modifier = Modifier.padding(top = 30.dp),
-            onClick = { onSignIn(email, password) }
+            onClick = {
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    isSignInSuccess = true
+                    onSignIn(email, password)
+                }
+            }
         ) {
             Text("Sign In")
+        }
+
+        if (isSignInSuccess) {
+            SignedInContent(email)
         }
     }
 }
 
 
-@Composable
-fun SignedInContent() {
-    val email by remember { mutableStateOf("") }
-    val password by remember { mutableStateOf("") }
 
+@Composable
+fun SignedInContent(email: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -105,6 +116,7 @@ fun SignedInContent() {
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
